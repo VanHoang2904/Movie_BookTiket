@@ -17,6 +17,7 @@ function Slider() {
          {movies.map(movie => {
           return (
             <div className="relative">
+            <div className="absolute bg-black bg-opacity-20 w-full h-full"></div>
             <img
               src= {`https://image.tmdb.org/t/p/w500/${movie.backdropPath}`}
               alt="image1"
