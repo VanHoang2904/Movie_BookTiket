@@ -25,7 +25,7 @@ function Booking() {
             token: `Bearer ${user.accessToken}`
           }
         },
-        {
+        user && {
           id: user._id,
           idMovie,
           name,
@@ -33,7 +33,7 @@ function Booking() {
           chair,
         })
         .then((res) => {
-          console.log(res.response.status)
+          console.log("dfjasdfjkakds",res.response.status)
           if (res.status === 403) {
             console.log("Đăng nhập lại")
             alert("Vui lòng đăng nhập lại");
