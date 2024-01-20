@@ -15,7 +15,7 @@ const middlewareUser = {
                 next();
             })
         }
-        else res.status(301).json("You're not authenticated")
+        else res.status(300).json("You're not authenticated")
     }
 }
 
