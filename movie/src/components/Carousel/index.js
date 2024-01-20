@@ -34,8 +34,8 @@ function Slider() {
                 </div>
               </div>
               <div className='flex mt-5 justify-evenly'>
-                <Link to='/' className='text-white border-solid border-white border-2 py-3 w-36 rounded-3xl hover:bg-red-500 hover:border-red-500 shadow-xl hover:shadow-red-300'>Xem Trailer</Link>
-                <Link to ='/' className='text-white border-solid border-white border-2 py-3 w-36 rounded-3xl hover:bg-red-500 hover:border-red-500 shadow-xl hover:shadow-red-300'>Đặt vé</Link>
+                <Link to={`/movie/${movie.idMovie}`} className='text-white border-solid border-white border-2 py-3 w-36 rounded-3xl hover:bg-red-500 hover:border-red-500 shadow-xl hover:shadow-red-300'>Xem Trailer</Link>
+                <Link to ={`/movie/${movie.idMovie}`} className='text-white border-solid border-white border-2 py-3 w-36 rounded-3xl hover:bg-red-500 hover:border-red-500 shadow-xl hover:shadow-red-300'>Đặt vé</Link>
               </div>
              
             </div>

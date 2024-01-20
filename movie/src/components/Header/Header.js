@@ -33,8 +33,8 @@ export default function Header() {
             <Link to="/" className="text-white mr-5 font-bold">
               Trang chủ
             </Link>
-            <div className="text-white mr-5 font-bold">Phim</div>
-            <a href="popular" className="text-white mr-5 font-bold">
+            <a href='#phim' className="text-white mr-5 font-bold">Phim</a>
+            <a href="#cinema" className="text-white mr-5 font-bold">
               Cụm rạp
             </a>
             <Link to = '/mylist' className="text-white mr-5 font-bold">Tin tức</Link>

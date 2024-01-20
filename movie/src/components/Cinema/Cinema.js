@@ -1,10 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Cinema() {
   const [cinemas, setCinemas] = useState()
   const [movies, setMovies] = useState()
   const [idCinema, setIdCinema] = useState("65ab485abb7dbeba32cc1ebe")
+  const [current, setCurrent] = useState()
+  const [name, setName] = useState()
+  const [address, setAddress] = useState()
+  const navigate = useNavigate()
   useEffect(() => {
     axios.get("https://backend-a0n6.onrender.com/cinema")
     .then(res => setCinemas(res.data))
@@ -12,13 +17,16 @@ function Cinema() {
 
    
   }, [])
-  const getMovieByCinema = (id) => {
+  const getMovieByCinema = (id, name, address) => {
     axios.get(`https://backend-a0n6.onrender.com/movie/cinema/${id}`)
     .then(res => {
       setMovies(res.data)
       setIdCinema(id)
     })
     .catch(err => console.log(err))
+    setCurrent(id)
+    setName(name)
+    setAddress(address)
   }
     return (
       <div className="flex items-start bg-black bg-opacity-25 w-full">
@@ -36,10 +44,10 @@ function Cinema() {
                 alt=""
               />
             </div>
-            <div className="w-2/5 px-10 border-r-">
+            <div className="w-2/5 border-r-2 mr-2">
               {cinemas.map(cinema => {
                 return (
-                  <button onClick={() => getMovieByCinema(cinema._id)} className="pt-3 text-white flex flex-col  justify-start items-start  border-b-red-500 border-solid border-b-2 border-r-blue-500 boder-r-2 pb-3 w-auto">
+                  <button onClick={() => getMovieByCinema(cinema._id, cinema.name, cinema.address)} className={`px-10 hover:bg-orange-500 pt-3 text-white flex flex-col  justify-start items-start  border-b-red-500 border-solid border-b-2 border-r-blue-500 boder-r-2 pb-3 w-auto ${current === cinema._id && "bg-orange-500"}`}>
                 <div className="text-sm" v>
                  {cinema.name}
                 </div>
@@ -67,7 +75,7 @@ function Cinema() {
                         date.id === idCinema && date.date.map(day => {
                         
                           return (
-                  <h2 className="bg-yellow-50 px-4 py-2 mt-2 rounded-sm cursor-pointer hover:bg-opacity-15  ">
+                  <h2 onClick={() => navigate(`/booking/${movie.id}/${movie.title}/${name}/${address}/${day}`)} className="bg-yellow-50 px-4 py-2 mt-2 rounded-sm cursor-pointer hover:bg-opacity-15  ">
                             {day}
                   </h2>
                           )

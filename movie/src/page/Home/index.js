@@ -21,7 +21,7 @@ function Home() {
         <div className="px-56">
           <Search />
         </div>
-        <div className="flex ml-10">
+        <div id="phim" className="flex ml-10">
           <div className="mr-3 uppercase border-b-2 border-solid border-red-500 mb-10 cursor-pointer">
             Phim đang chiếu
           </div>
@@ -35,7 +35,7 @@ function Home() {
             </div>
           ))}
         </div>
-        <div className="shadow-lg mb-10 w-3/4 relative left-1/2 -translate-x-1/2">
+        <div id="cinema" className="shadow-lg mb-10 w-3/4 relative left-1/2 -translate-x-1/2">
           <Cinema />
         </div>
 

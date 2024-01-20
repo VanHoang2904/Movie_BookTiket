@@ -17,7 +17,7 @@ const apiRouter = (app) => {
     router.get("/movie/cinema/:id", movieController.getMovieByCinema)
     router.get("/cinema", cinemaController.getAllCinema)
     router.get("/cinema/:id", cinemaController.getCinemaById)
-    router.patch("/user/order", orderController.order)
+    router.patch("/user/order", middlewareUser.verifyToken, orderController.order)
     return app.use("/", router)
 }
 
