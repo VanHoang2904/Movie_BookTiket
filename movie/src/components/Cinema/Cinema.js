@@ -13,7 +13,7 @@ function Cinema() {
    
   }, [])
   const getMovieByCinema = (id) => {
-    axios.get(`http://localhost:3001/movie/cinema/${id}`)
+    axios.get(`https://backend-a0n6.onrender.com/movie/cinema/${id}`)
     .then(res => {
       setMovies(res.data)
       setIdCinema(id)
