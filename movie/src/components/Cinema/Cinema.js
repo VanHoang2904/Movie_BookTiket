@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function Cinema() {
   const [cinemas, setCinemas] = useState()
   const [movies, setMovies] = useState()
-  const [idCinema, setIdCinema] = useState()
+  const [idCinema, setIdCinema] = useState("65ab485abb7dbeba32cc1ebe")
   useEffect(() => {
     axios.get("https://backend-a0n6.onrender.com/cinema")
     .then(res => setCinemas(res.data))
