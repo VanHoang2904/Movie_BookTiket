@@ -21,7 +21,6 @@ function Home() {
         <div className="px-56">
           <Search />
         </div>
-
         <div className="flex ml-10">
           <div className="mr-3 uppercase border-b-2 border-solid border-red-500 mb-10 cursor-pointer">
             Phim đang chiếu
