@@ -22,7 +22,7 @@ function MovieDetail() {
         if (res.status === 200) {
           setMovie(res.data);
           const cinemaPromises = res.data.cinema.map(cinema => {
-            return axios.get(`http://localhost:3001/cinema/${cinema.id}`)
+            return axios.get(`https://backend-a0n6.onrender.com/${cinema.id}`)
               .then(res => res.data);
           });
   
