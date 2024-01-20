@@ -19,7 +19,7 @@ function Booking() {
     if (user) {
       console.log(user)
       axios
-        .patch("https://backend-a0n6.onrender.com/user/order", 
+        .patch("https://backend-5bd7.onrender.com/user/order", 
         {
           headers: {
             token: `Bearer ${user.accessToken}`
@@ -39,6 +39,9 @@ function Booking() {
             alert("Vui lòng đăng nhập lại");
             localStorage.clear();
           }
+          else if (res.response.status === 301) {
+            navigate("/login")
+          }
         });
     } else {
       navigate("/login");
@@ -46,7 +49,7 @@ function Booking() {
   }
   const getMovie =async (id) => {
     axios
-      .get(`https://backend-a0n6.onrender.com/movie/${id}`)
+      .get(`https://backend-5bd7.onrender.com/movie/${id}`)
       .then((res) => setMovie(res.data));
   }
   return (

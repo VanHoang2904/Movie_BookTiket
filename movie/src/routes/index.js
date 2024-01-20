@@ -1,6 +1,6 @@
 import MovieDetail from "../components/MovieDetail/MoiveDetail"
 import Home from "../page/Home"
-import DefaultLayout from "../DefaultLayout/index."
+import DefaultLayout from "../DefaultLayout"
 import SingIn from "../components/SignIn/SignIn"
 import Register from "../components/Register/Register"
 import MyList from "../components/MyList/MyList"

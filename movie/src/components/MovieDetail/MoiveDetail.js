@@ -17,12 +17,12 @@ function MovieDetail() {
   const [bgVideo, setbgVideo] = useState("hidden")
   const youtubeRef = useRef(null);
   useEffect(() => {
-    axios.get(`https://backend-a0n6.onrender.com/movie/${id}`)
+    axios.get(`https://backend-5bd7.onrender.com/movie/${id}`)
       .then(res => {
         if (res.status === 200) {
           setMovie(res.data);
           const cinemaPromises = res.data.cinema.map(cinema => {
-            return axios.get(`https://backend-a0n6.onrender.com/cinema/${cinema.id}`)
+            return axios.get(`https://backend-5bd7.onrender.com/cinema/${cinema.id}`)
               .then(res => res.data);
           });
   
