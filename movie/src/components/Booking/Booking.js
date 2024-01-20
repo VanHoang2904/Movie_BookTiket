@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 function Booking() {
   const {id, title, name, address, showtime} = useParams();
   const [current, setCurrent] = useState([])
@@ -8,25 +8,46 @@ function Booking() {
   const [user, setUser] = useState()
   const [click, setClick] = useState(false)
   const [movie, setMovie] = useState()
+  const navigate = useNavigate()
   const chair = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('user')))
     console.log(user)
-  
+    
   }, [])
   const order = (idMovie, name, address, chair ) => {
-    console.log(user)
-    axios.patch("https://backend-a0n6.onrender.com/user/order", {
-      id: user._id,
-      idMovie,
-      name,
-      address,
-      chair
-    })
+    if (user) {
+      console.log(user)
+      axios
+        .patch("https://backend-a0n6.onrender.com/user/order", 
+        {
+          headers: {
+            token: `Bearer ${user.accessToken}`
+          }
+        },
+        {
+          id: user._id,
+          idMovie,
+          name,
+          address,
+          chair,
+        })
+        .then((res) => {
+          console.log(res)
+          if (res.status === 403) {
+            console.log("Đăng nhập lại")
+            alert("Vui lòng đăng nhập lại");
+            localStorage.clear();
+          }
+        });
+    } else {
+      navigate("/login");
+    }
   }
   const getMovie =async (id) => {
-    axios.get(`https://backend-a0n6.onrender.com/movie/${id}`)
-    .then(res => setMovie(res.data))
+    axios
+      .get(`https://backend-a0n6.onrender.com/movie/${id}`)
+      .then((res) => setMovie(res.data));
   }
   return (
     <div className="pt-16 px-4">
