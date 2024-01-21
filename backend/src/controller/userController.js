@@ -15,14 +15,14 @@ const getAll = async (req, res, next) => {
 const genrateAcessToken = (other) => {
     return jwt.sign({
         other    
-        }, process.env.ACCESSKEY, {expiresIn: "60s"})
+        }, process.env.ACCESSKEY, {expiresIn: "1d"})
 }
 
 const genrateRefershToken = (user) => {
     return jwt.sign({
         user,
             
-        }, process.env.REFRESHTOKEN, {expiresIn: "1d"})
+        }, process.env.REFRESHTOKEN, {expiresIn: "2d"})
 }
 
 const user = async (req, res, next) => {
