@@ -18,12 +18,12 @@ function MovieDetail() {
   const youtubeRef = useRef(null);
   const [current, setCurrent] = useState()
   useEffect(() => {
-    axios.get(`http://localhost:3001/movie/${id}`)
+    axios.get(`https://movie-back-end-yhp8.onrender.com/movie/${id}`)
       .then(res => {
         if (res.status === 200) {
           setMovie(res.data);
           const cinemaPromises = res.data.cinema.map(cinema => {
-            return axios.get(`http://localhost:3001/cinema/${cinema.id}`)
+            return axios.get(`https://movie-back-end-yhp8.onrender.com/cinema/${cinema.id}`)
               .then(res => res.data);
           });
   

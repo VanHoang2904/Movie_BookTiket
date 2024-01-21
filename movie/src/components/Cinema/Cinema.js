@@ -11,14 +11,14 @@ function Cinema() {
   const [address, setAddress] = useState()
   const navigate = useNavigate()
   useEffect(() => {
-    axios.get("http://localhost:3001/cinema")
+    axios.get("https://movie-back-end-yhp8.onrender.com/cinema")
     .then(res => setCinemas(res.data))
     .catch(err => console.log(err))
 
    
   }, [])
   const getMovieByCinema = (id, name, address) => {
-    axios.get(`http://localhost:3001/movie/cinema/${id}`)
+    axios.get(`https://movie-back-end-yhp8.onrender.com/movie/cinema/${id}`)
     .then(res => {
       setMovies(res.data)
       setIdCinema(id)

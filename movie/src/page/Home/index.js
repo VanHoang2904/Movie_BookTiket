@@ -10,7 +10,7 @@ import axios from "axios";
 function Home() {
   const [movies, setMovies] = useState([])
     useEffect(() => {
-      axios.get("http://localhost:3001/movie")
+      axios.get("https://movie-back-end-yhp8.onrender.com/movie")
         .then((res) => {
             setMovies(res.data)
         })

@@ -24,7 +24,7 @@ function Booking() {
         'token': `Bearer ${user.accessToken}`, // Đặt header Authorization với giá trị token
       };
       axios
-        .patch("http://localhost:3001/user/order", 
+        .patch("https://movie-back-end-yhp8.onrender.com/user/order", 
         
        {
           
@@ -59,7 +59,7 @@ function Booking() {
   }
   const getMovie =async (id) => {
     axios
-      .get(`http://localhost:3001/movie/${id}`)
+      .get(`https://movie-back-end-yhp8.onrender.com/movie/${id}`)
       .then((res) => setMovie(res.data));
   }
   return (
