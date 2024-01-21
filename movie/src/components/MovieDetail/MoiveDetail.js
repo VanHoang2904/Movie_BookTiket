@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import StarRatings from "react-star-ratings";
-import Cinema from "../Cinema/Cinema";
+
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import YouTube from 'react-youtube';

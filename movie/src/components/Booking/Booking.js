@@ -7,15 +7,32 @@ function Booking() {
   const [total, setTotal] = useState(0)
   const [user, setUser] = useState()
   const [click, setClick] = useState(false)
-  const [movie, setMovie] = useState()
+  const [movie, setMovie] = useState([])
   const navigate = useNavigate()
  
   const chair = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
   useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem('user')))
-    console.log(user)
+    setUser(JSON.parse(localStorage.getItem("user")));
     
+   
   }, [])
+  const fetchData = async () => {
+    console.log(user);
+    const promises = user.orderDetail.map((item) =>
+      axios.get(
+        `https://movie-back-end-yhp8.onrender.com/movie/${item.idMovie}`
+      )
+    );
+
+    try {
+      const responses = await Promise.all(promises);
+      const movieData = responses.map((res) => res.data);
+      setMovie([...movie, movieData]);
+      console.log(movieData)
+    } catch (error) {
+      console.error("Error fetching movie data:", error);
+    }
+  };
   const order = (idMovie, name, address, chair ) => {
     if (user) {
       console.log(user)
@@ -50,19 +67,18 @@ function Booking() {
           else if (res.status === 301) {
             navigate("/login")
           }
-          else alert("Đặt vé thành công")
+          else {
+           
+            alert("Đặt vé thành công")
+          }
         })
         .catch(error => console.log(error))  
-        
+       
     } else {
       navigate("/login");
     }
   }
-  const getMovie =async (id) => {
-    axios
-      .get(`https://movie-back-end-yhp8.onrender.com/movie/${id}`)
-      .then((res) => setMovie(res.data));
-  }
+
   return (
     <div className="pt-16 px-4">
       <div className="flex mt-3">
@@ -80,6 +96,7 @@ function Booking() {
         <h1
           onClick={() => {
             setClick(true);
+            fetchData()
           }}
           className={`pb-3 text-black mr-8 cursor-pointer  ${
             click &&
@@ -188,23 +205,24 @@ function Booking() {
         <div className="mt-5">
           <h1 className="text-2xl ">Lịch sử đặt vé xem phim</h1>
           <div className="flex flex-wrap">
-            {user &&
-              user.orderDetail.map((tikcet) => {
+            {user && 
+            movie[0] && movie[0].map(item => {
+              return user.orderDetail.map((tikcet) => {
+                console.log(movie, tikcet.idMovie)
                 return (
-                  <div className="px-2 w-1/3 py-2">
+                  item.idMovie == tikcet.idMovie && <div className="px-2 w-1/3 py-2">
                     <div className="border-2 border-solid border-black w-full flex items-center py-3 px-2">
                       <div className="w-20 h-20 overflow-hidden">
                         <img
                           className="rounded-full object-cover w-full h-full"
-                          src="https://kenh14cdn.com/2018/8/14/3892646619320862101920633452533710274953216n-1534255397475538002738.jpg"
+                          src={`https://image.tmdb.org/t/p/w500/${item.posterPath}}`}
                           alt=""
                         />
                       </div>
+
                       <div className="flex flex-col items-start ml-2">
-                        <div className="font-bold">Mã vé: {tikcet._id}</div>
-                        <div className="font-bold">
-                          {getMovie(tikcet.idMovie) && movie?.title}
-                        </div>
+                        <div className="font-bold">Mã vé: {tikcet.idOrder}</div>
+                        <div className="font-bold">{item.title}</div>
                         <div className="font-bold">
                           {tikcet.name.length > 20
                             ? tikcet.name.split(0, 20)
@@ -225,8 +243,13 @@ function Booking() {
                       </div>
                     </div>
                   </div>
-                );
-              })}
+                )
+              })
+            })}
+             
+              
+               
+             
           </div>
         </div>
       )}
