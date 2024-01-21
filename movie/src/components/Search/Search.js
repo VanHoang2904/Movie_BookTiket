@@ -28,17 +28,14 @@ function Search() {
   }
     return (
       <div className="shadow-xl mb-8 rounded-xl flex  justify-evenly py-2 m-auto">
-        <select className="w-60 py-3 outline-none rounded-xl px-2 border-black border-2">
-          <option  className= "px-2" value="volvo">Phim</option>
+        <select onClick={() => {}} className="w-60 py-3 outline-none rounded-xl px-2 border-black border-2">
+          <option  className= "px-2" value="">Phim</option>
           {movies.map(movie => {
             return (
-              <option onClick={() => {
-                setCurrentMovie(movie._id)
-                setCinemas()
-                getCinemaById()
-              }
-                    
-              } className="">{movie.title}</option>
+              <div onClick={() => {console.log(movie._id)}}>
+              <option  className="">{movie.title}</option>
+
+              </div>
             )
           })}
         </select>

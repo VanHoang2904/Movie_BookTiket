@@ -6,7 +6,7 @@ const order = async (req, res, next) => {
         const update = {
             
             idOrder: 1,
-            idMovie: req.body.idMovie,
+            idMovie: parseInt(req.body.idMovie),
             name: req.body.name,
             address: req.body.address,
             situation: false,
