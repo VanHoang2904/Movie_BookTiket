@@ -44,7 +44,7 @@ function Search() {
         </select>
         <select className="w-60 py-3 outline-none rounded-xl px-2 border-black border-2">
           <option  className= "px-2" value="volvo">Rạp</option>
-          {currentMovie ?  : cinemas.map(cinema => {
+          {cinemas.map(cinema => {
             return (
               <option >{cinema.name}</option>
             )
