@@ -16,13 +16,14 @@ function MovieDetail() {
   const [showtime, setShowTime] = useState()
   const [bgVideo, setbgVideo] = useState("hidden")
   const youtubeRef = useRef(null);
+  const [current, setCurrent] = useState()
   useEffect(() => {
-    axios.get(`https://backend-5bd7.onrender.com/movie/${id}`)
+    axios.get(`http://localhost:3001/movie/${id}`)
       .then(res => {
         if (res.status === 200) {
           setMovie(res.data);
           const cinemaPromises = res.data.cinema.map(cinema => {
-            return axios.get(`https://backend-5bd7.onrender.com/cinema/${cinema.id}`)
+            return axios.get(`http://localhost:3001/cinema/${cinema.id}`)
               .then(res => res.data);
           });
   
@@ -69,7 +70,10 @@ function MovieDetail() {
                       Trailer
                     </button>
                     <Link
-                      to={`/booking/${movie.idMovie}/${movie.title}/${nameCinema}/${addressCinema}/${showtime}`}
+                      onClick={() => {if (nameCinema === undefined || addressCinema === undefined) {
+                        console.log(nameCinema, addressCinema)
+                        alert("Vui lòng chọn rạp và suất chiếu")}}}
+                      to={nameCinema && addressCinema ? `/booking/${movie.idMovie}/${movie.title}/${nameCinema}/${addressCinema}/${showtime}` : "#showtime"}
                       className="hover:bg-blue-500 outline-none  border-blue-500 border-2 w-52 text-white py-2 mr-3 border-solid uppercase"
                     >
                       Đặt vé
@@ -77,7 +81,7 @@ function MovieDetail() {
                   </div>
                 </div>
               </div>
-              <div className="mt-10">
+              <div className="mt-10" id="showtime">
                 <div className="flex items-start bg-black bg-opacity-25 w-full">
                   {movie && (
                     <div className="flex w-full">
@@ -103,9 +107,10 @@ function MovieDetail() {
                                   setCinemaId(cinema._id);
                                   setNameCinema(cinema.name);
                                   setAddressCinema(cinema.address);
+                                  setCurrent(cinema._id)
                                 }}
                                 key={cinema._id}
-                                className="pt-3 text-white flex flex-col  justify-start items-start  border-b-red-500 border-solid border-b-2 border-r-blue-500 boder-r-2 pb-3 w-auto"
+                                className={`px-10 hover:bg-orange-500 pt-3 text-white flex flex-col  justify-start items-start  border-b-red-500 border-solid border-b-2 border-r-blue-500 boder-r-2 pb-3 w-auto ${current === cinema._id && "bg-orange-500"}`}
                               >
                                 <div className="text-sm">{cinema.name}</div>
                                 <div className="text-sm text-left" v>

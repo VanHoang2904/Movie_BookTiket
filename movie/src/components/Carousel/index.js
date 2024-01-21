@@ -7,7 +7,7 @@ function Slider() {
     
   const [movies, setMovies] = useState([])
   useEffect(() => {
-    axios.get("https://backend-5bd7.onrender.com/movie")
+    axios.get("http://localhost:3001/movie")
       .then((res) => {
           setMovies(res.data.splice(0,2))
       })

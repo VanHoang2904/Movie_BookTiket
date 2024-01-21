@@ -9,6 +9,7 @@ function Booking() {
   const [click, setClick] = useState(false)
   const [movie, setMovie] = useState()
   const navigate = useNavigate()
+ 
   const chair = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30];
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem('user')))
@@ -18,38 +19,47 @@ function Booking() {
   const order = (idMovie, name, address, chair ) => {
     if (user) {
       console.log(user)
+      const headers = {
+        'Content-Type': 'application/json', // Đặt kiểu dữ liệu gửi đi (ví dụ: application/json)
+        'token': `Bearer ${user.accessToken}`, // Đặt header Authorization với giá trị token
+      };
       axios
-        .patch("https://backend-5bd7.onrender.com/user/order", 
-        {
-          headers: {
-            token: `Bearer ${user.accessToken}`
-          }
-        },
-        user && {
+        .patch("http://localhost:3001/user/order", 
+        
+       {
+          
           id: user._id,
           idMovie,
           name,
           address,
           chair,
-        })
+        },
+        {
+          headers
+        }
+       )
         .then((res) => {
-          console.log("dfjasdfjkakds",res.response.status)
-          if (res.status === 403) {
+          console.log(res)
+          if (res.data.status === 403) {
             console.log("Đăng nhập lại")
             alert("Vui lòng đăng nhập lại");
             localStorage.clear();
-          }
-          else if (res.response.status === 301) {
+            setUser()
             navigate("/login")
           }
-        });
+          else if (res.status === 301) {
+            navigate("/login")
+          }
+        })
+        .catch(error => console.log(error))  
+        
     } else {
       navigate("/login");
     }
   }
   const getMovie =async (id) => {
     axios
-      .get(`https://backend-5bd7.onrender.com/movie/${id}`)
+      .get(`http://localhost:3001/movie/${id}`)
       .then((res) => setMovie(res.data));
   }
   return (

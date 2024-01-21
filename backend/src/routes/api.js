@@ -8,7 +8,7 @@ import { middlewareUser } from "../middleware/middlewareUser";
 
 const router = express.Router()
 
-const apiRouter = (app) => {
+const apiRouter = (app) => { 
     router.get("/user/getall", middlewareUser.verifyToken, userController.getAll);
     router.post("/user", userController.user)
     router.post("/user/register",middlewareUser.verifyToken ,userController.userRegister)
@@ -20,5 +20,4 @@ const apiRouter = (app) => {
     router.patch("/user/order", middlewareUser.verifyToken, orderController.order)
     return app.use("/", router)
 }
-
 export default apiRouter

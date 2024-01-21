@@ -22,7 +22,7 @@ const order = async (req, res, next) => {
       res.status(200).json(newOrder)
     } catch (error) {
         res.json("Lỗi server")
-        console.log(error)
+        console.log(error) 
     }
 }
 

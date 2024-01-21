@@ -6,13 +6,13 @@ function Search() {
   const [movies, setMovies] = useState([])
   const [cinemas, setCinemas] = useState([])
   useEffect(() => {
-    axios.get("https://backend-5bd7.onrender.com/movie")
+    axios.get("http://localhost:3001/movie")
       .then((res) => {
           setMovies(res.data)
       })
       .catch(err => console.log(err))
 
-        axios.get("https://backend-5bd7.onrender.com/cinema")
+        axios.get("http://localhost:3001/cinema")
         .then(res => setCinemas(res.data))
         .catch(err => console.log(err))
 

@@ -13,7 +13,7 @@ function Register() {
     if (rePassWord === password) {
       setCheckPass(false);
       axios
-        .post("https://backend-5bd7.onrender.com/user/register", {
+        .post("http://localhost:3001/user/register", {
           name,
           email,
           password,

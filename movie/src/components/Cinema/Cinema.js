@@ -11,14 +11,14 @@ function Cinema() {
   const [address, setAddress] = useState()
   const navigate = useNavigate()
   useEffect(() => {
-    axios.get("https://backend-5bd7.onrender.com/cinema")
+    axios.get("http://localhost:3001/cinema")
     .then(res => setCinemas(res.data))
     .catch(err => console.log(err))
 
    
   }, [])
   const getMovieByCinema = (id, name, address) => {
-    axios.get(`https://backend-5bd7.onrender.com/movie/cinema/${id}`)
+    axios.get(`http://localhost:3001/movie/cinema/${id}`)
     .then(res => {
       setMovies(res.data)
       setIdCinema(id)
@@ -75,7 +75,7 @@ function Cinema() {
                         date.id === idCinema && date.date.map(day => {
                         
                           return (
-                  <h2 onClick={() => navigate(`/booking/${movie.id}/${movie.title}/${name}/${address}/${day}`)} className="bg-yellow-50 px-4 py-2 mt-2 rounded-sm cursor-pointer hover:bg-opacity-15  ">
+                  <h2 onClick={() => navigate(`/booking/${movie.idMovie}/${movie.title}/${name}/${address}/${day}`)} className="bg-yellow-50 px-4 py-2 mt-2 rounded-sm cursor-pointer hover:bg-opacity-15  ">
                             {day}
                   </h2>
                           )

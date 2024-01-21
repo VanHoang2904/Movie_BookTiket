@@ -2,20 +2,33 @@ const jwt = require("jsonwebtoken")
 
 const middlewareUser = {
     verifyToken: (req, res, next) => {
-        console.log(req.body)
-        const token = req.headers.token 
+        const token = req.headers.token  
         if (token) {
+            console.log(req.headers)
             const accessToken = token.split(" ")[1]
-            console.log(accessToken)
             jwt.verify(accessToken, process.env.ACCESSKEY, (err, user) => {
                 if (err) {
-                    res.status(403).json("Token is no valid")
+            console.log(accessToken)
+
+                    res.json({
+                        status: 403,
+                        message: "Token is no valid"
+                    })
                 }
+               else {
                 req.user = user;
                 next();
+               }
             })
         }
-        else res.status(300).json("You're not authenticated")
+        else {
+        console.log(req.headers,)
+        res.json({
+            status: 301,
+            message: "You're not authenticated"
+        })
+
+        }
     }
 }
 
