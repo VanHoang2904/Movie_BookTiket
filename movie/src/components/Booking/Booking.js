@@ -201,7 +201,7 @@ function Booking() {
                         />
                       </div>
                       <div className="flex flex-col items-start ml-2">
-                        <div className="font-bold">Mã vé: {tikcet.idOrder}</div>
+                        <div className="font-bold">Mã vé: {tikcet._id}</div>
                         <div className="font-bold">
                           {getMovie(tikcet.idMovie) && movie?.title}
                         </div>
