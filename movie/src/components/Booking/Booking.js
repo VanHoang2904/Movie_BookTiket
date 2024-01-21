@@ -50,6 +50,7 @@ function Booking() {
           else if (res.status === 301) {
             navigate("/login")
           }
+          else alert("Đặt vé thành công")
         })
         .catch(error => console.log(error))  
         
