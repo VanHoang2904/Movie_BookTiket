@@ -143,7 +143,11 @@ function Booking() {
           </div>
           <div className="flex flex-col flex-1 ml-3 items-start">
             <div className="text-red-500 font-bold text-xl border-t-transparent border-l-transparent border-r-transparent pb-3 w-full px-3 border-2 border-solid">
-              {total} VND
+              {Number(total).toLocaleString("en-US", {
+                style: "currency",
+                currency: "VND",
+                minimumFractionDigits: 0,
+              })}
             </div>
             <div className="text-start py-4 border-t-transparent border-l-transparent border-r-transparent w-full border-2 border-solid">
               <div className="font-bold uppercase mb-2">{title}</div>
@@ -184,10 +188,8 @@ function Booking() {
         <div className="mt-5">
           <h1 className="text-2xl ">Lịch sử đặt vé xem phim</h1>
           <div className="flex flex-wrap">
-            {
-              user &&
-               user.orderDetail.map( (tikcet) => {
-              
+            {user &&
+              user.orderDetail.map((tikcet) => {
                 return (
                   <div className="px-2 w-1/3 py-2">
                     <div className="border-2 border-solid border-black w-full flex items-center py-3 px-2">
@@ -200,16 +202,21 @@ function Booking() {
                       </div>
                       <div className="flex flex-col items-start ml-2">
                         <div className="font-bold">Mã vé: {tikcet.idOrder}</div>
-                        <div className="font-bold">{
-    getMovie(tikcet.idMovie) && movie?.title}</div>
-                        <div className="font-bold">{tikcet.name.length > 20 ? tikcet.name.split(0, 20) : tikcet.name}</div>
+                        <div className="font-bold">
+                          {getMovie(tikcet.idMovie) && movie?.title}
+                        </div>
+                        <div className="font-bold">
+                          {tikcet.name.length > 20
+                            ? tikcet.name.split(0, 20)
+                            : tikcet.name}
+                        </div>
                         <div>Ngày đặt</div>
                         <div>Thời lượng: 120p</div>
-                        <div className='text-start flex'>
-                          Ghế: {tikcet.chair.map((chair) => {
-                            return <p className='mr-2'>{chair}</p>;
+                        <div className="text-start flex">
+                          Ghế:{" "}
+                          {tikcet.chair.map((chair) => {
+                            return <p className="mr-2">{chair}</p>;
                           })}
-                         
                         </div>
                         <div>
                           Tình trạng:{" "}

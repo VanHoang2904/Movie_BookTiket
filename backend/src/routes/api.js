@@ -11,7 +11,7 @@ const router = express.Router()
 const apiRouter = (app) => { 
     router.get("/user/getall", middlewareUser.verifyToken, userController.getAll);
     router.post("/user", userController.user)
-    router.post("/user/register",middlewareUser.verifyToken ,userController.userRegister)
+    router.post("/user/register" ,userController.userRegister)
     router.get("/movie", movieController.getAllMovie)
     router.get("/movie/:id", movieController.getMovie)
     router.get("/movie/cinema/:id", movieController.getMovieByCinema)

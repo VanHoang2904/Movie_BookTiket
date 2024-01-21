@@ -24,7 +24,6 @@ function Register() {
           }
           else if (response.status === 201) {
             alert("Đăng ký thất bại");
-
             setCheckEmail(true)
           }
         })
